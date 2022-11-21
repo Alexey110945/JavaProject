@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sdk-1.0.14">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../sdk-1.0.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
