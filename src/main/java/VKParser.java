@@ -29,7 +29,7 @@ public class VKParser {
                     .search(actor)
                     .fields(Fields.SEX, Fields.BDATE, Fields.HOME_TOWN, Fields.CITY)
                     .lang(Lang.EN)
-                    .q("Годзилла")
+                    .q("Мамаев Алексей")
                     .count(1)
                     .execute();
 
