@@ -21,7 +21,6 @@ public class Main {
 //        System.out.println(module);
 //
 //        System.out.println(module.getResult());
-
-
+        var vkp = new VKParser();
     }
 }

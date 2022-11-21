@@ -19,4 +19,24 @@ public class VKParser {
     TransportClient transportClient = new HttpTransportClient();
     VkApiClient vk = new VkApiClient(transportClient);
 
+    public VKParser(){
+        SearchResponse request = null;
+
+        var actor = new UserActor(1,"");
+        try{
+            request = vk
+                    .users()
+                    .search(actor)
+                    .fields(Fields.SEX, Fields.BDATE, Fields.HOME_TOWN, Fields.CITY)
+                    .lang(Lang.EN)
+                    .q("Годзилла")
+                    .count(1)
+                    .execute();
+
+        } catch (Exception ignore) {}
+
+        if (request != null)
+            System.out.println(request.getItems());
+    }
 }
+
