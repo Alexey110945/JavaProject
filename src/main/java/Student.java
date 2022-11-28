@@ -6,8 +6,8 @@ public class Student extends Person{
     private Course course;
     private final String group;
 
-    public Student(String surnameName, String group){
-        super(surnameName);
+    public Student(String fullName, String group){
+        super(fullName);
         this.group = group;
     }
 
@@ -46,6 +46,6 @@ public class Student extends Person{
 
 
     public String toString() {
-        return super.getSurnameName() + "\nГруппа: " + group;
+        return super.getFullName() + "\nГруппа: " + group;
     }
 }

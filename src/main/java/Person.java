@@ -1,24 +1,31 @@
+import java.util.Objects;
+
 public class Person {
-    private final String surnameName;
+    private final String fullName;
+    private Gender gender = Gender.Unknown;
 
     enum Gender{
         Male,
-        Female
+        Female,
+        Unknown
     }
 
-    public Person(String surnameName){
-        this.surnameName = surnameName;
+    public Person(String fullName){
+        this.fullName = fullName;
     }
 
-    public String getSurname() {
-        return "";
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getName() {
-        return "";
+    public Gender getGender(){
+        return gender;
     }
 
-    public String getSurnameName() {
-        return surnameName;
+    public void setGender(String genderNum){
+        if (Objects.equals(genderNum, "2"))
+            gender = Gender.Male;
+        else if (Objects.equals(genderNum, "1"))
+            gender = Gender.Female;
     }
 }
