@@ -11,13 +11,10 @@ public class CSVParser {
     ArrayList<Student> students = new ArrayList<Student>();
     String[] columns;
     String[] maxScores;
-
     String[] moduleNames;
 
-
-    public CSVParser() throws IOException {
-        var path = Path.of("basicprogramming_2.csv");
-        var fileLines = Files.readAllLines(path, StandardCharsets.UTF_8);
+    public CSVParser(String path) throws IOException {
+        var fileLines = Files.readAllLines(Path.of(path), StandardCharsets.UTF_8);
         var data = fileLines.stream().map(line -> line.split(";", -1)).toList();
         moduleNames = data.get(0);
         columns = data.get(1);
@@ -51,7 +48,7 @@ public class CSVParser {
             var mScore = Arrays.copyOfRange(maxScores, i, Arrays.asList(titles).indexOf("Сем") + i + 1);
             var hMaxScore = find(hw, "ДЗ") != -1 ? maxScores[find(hw, "ДЗ") + i]: "0";
 
-            var exercisesMaxScore = Float.parseFloat(maxScores[i + 1]);
+            var exercisesMaxScore = Float.parseFloat(columns[i + 1].startsWith("Упр") ? maxScores[i + 1] : "0");
             var homeworkMaxScore = Float.parseFloat(hMaxScore);
             var activityMaxScore = Float.parseFloat(maxScores[i]);
             var activityScore = Float.parseFloat(maxScores[i + md.length - 1]);

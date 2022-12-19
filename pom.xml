@@ -12,7 +12,12 @@
         <dependency>
             <groupId>com.vk.api</groupId>
             <artifactId>sdk</artifactId>
-            <version>LATEST_VERSION</version>
+            <version>1.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
         </dependency>
     </dependencies>
 

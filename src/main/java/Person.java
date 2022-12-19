@@ -4,6 +4,8 @@ public class Person {
     private final String fullName;
     private Gender gender = Gender.Unknown;
 
+    private String city = "Some city";
+
     enum Gender{
         Male,
         Female,
@@ -20,6 +22,13 @@ public class Person {
 
     public Gender getGender(){
         return gender;
+    }
+    public String getCity(){
+        return city;
+    }
+
+    public void setCity(String city){
+        this.city = city;
     }
 
     public void setGender(String genderNum){

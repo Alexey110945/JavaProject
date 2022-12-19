@@ -44,8 +44,27 @@ public class Student extends Person{
         return null;
     }
 
+    public String getGroup(){
+        return group;
+    }
 
     public String toString() {
         return super.getFullName() + "\nГруппа: " + group;
     }
+
+    public float getHomeworkScore(){
+        return course.getHomeworkScore();
+    }
+    public float getExercisesScore(){
+        return course.getExercisesScore();
+    }
+
+    public float getActivityScore(){
+        return course.getActivityScore();
+    }
+
+    public float getSemScore(){
+        return course.getSemScore();
+    }
+
 }
