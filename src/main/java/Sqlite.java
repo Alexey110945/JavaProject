@@ -244,8 +244,6 @@ public class Sqlite {
                 result[i] = Math.round(mean * 100) ;
                 i++;
             }
-
-
         } catch (Exception ignore) {}
         return result;
     }

@@ -4,7 +4,7 @@ public class Person {
     private final String fullName;
     private Gender gender = Gender.Unknown;
 
-    private String city = "Some city";
+    private String city = "Unknown";
 
     enum Gender{
         Male,

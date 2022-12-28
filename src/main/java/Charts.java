@@ -14,6 +14,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 class Charts{
     private final Sqlite sqlite;
@@ -57,9 +58,9 @@ class Charts{
         saveChart(path,
                 createHistogram("Успеваемость по модулям",
                         sqlite.getMeanScoreModules()), 2300, 1000);
-        setKeysValueAxisLabelForCities();
-        saveChart(path, createHistogram("Города",
-                sqlite.getCountStudentsFromCities()), 1200, 700);
+
+        var data = getDatasetKeysValueAxisLabelForCities(sqlite.getCountStudentsFromCities());
+        saveChart(path, createHistogram("Города", data), 1800, 700);
 
     }
 
@@ -119,12 +120,31 @@ class Charts{
             rowKeys[i] = "Средний балл за модуль";
     }
 
-    private void setKeysValueAxisLabelForCities(){
+    private Integer[] getDatasetKeysValueAxisLabelForCities(Integer[] data){
         valueAxisLabel = "Количество человек";
-        columnKeys = sqlite.getCities();
-        rowKeys = new String[columnKeys.length];
-        for (var i = 0; i < columnKeys.length; i++)
-            rowKeys[i] = "Студенты";
+        var allColumnKeys = sqlite.getCities();
+        var otherCities = 0;
+        var columns = new ArrayList<String>();
+        var newData = new ArrayList<Integer>();
+
+        for (var i = 0; i < allColumnKeys.length; i++)
+            if (data[i] >= 5){
+                columns.add(allColumnKeys[i]);
+                newData.add(data[i]);
+            }
+            else
+                otherCities += data[i];
+        columns.add("Другие города");
+        newData.add(otherCities);
+
+        columnKeys = columns.toArray(new String[0]);
+        rowKeys = new String[columns.size()];
+        var result = new Integer[columns.size()];
+        for (var i = 0; i < columnKeys.length; i++){
+            rowKeys[i] = "Количество человек";
+            result[i] = newData.get(i);
+        }
+        return result;
     }
 
     private JFreeChart createHistogram(String title, Integer[] data)

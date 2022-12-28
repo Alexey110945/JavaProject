@@ -1,3 +1,4 @@
+import com.vk.api.sdk.client.Lang;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
@@ -7,7 +8,6 @@ import com.vk.api.sdk.objects.users.responses.SearchResponse;
 import java.lang.Thread;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VKParser {
@@ -22,40 +22,29 @@ public class VKParser {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
         assert reader != null;
         actor = new UserActor(Integer.parseInt(reader.get(1)), reader.get(0));
+       }
+
+    public SearchResponse getGenderAndCity(String studentFullName) {
+        var request = FindInGroup(studentFullName);
+        if (request.getItems().size() == 0)
+            return null;
+        return request;
     }
 
-    public ArrayList<String> getGenderAndHomeTown(String studentFullName) {
-
-        var result = new ArrayList<String>();
-
-        var request = FindInGroup(studentFullName, 215509427); // basicprogrammingrtf2022
-        if (request.getItems().size() == 0) {
-            request = FindInGroup(studentFullName, 22941070); // ural.federal.university
-            if (request.getItems().size() == 0)
-                return null;
-        }
-        if (request.getItems().get(0).getSex() != null)
-            result.add(request.getItems().get(0).getSex().getValue());
-        if (request.getItems().get(0).getCity() != null)
-            result.add(request.getItems().get(0).getCity().getTitle());
-        return result;
-    }
-
-    private SearchResponse FindInGroup(String fullName, int idGroup) {
+    private SearchResponse FindInGroup(String fullName) {
         SearchResponse request = null;
         try {
             request = vk
                     .users()
                     .search(actor)
-                    .count(1)
-                    .groupId(idGroup)
-                    .q(fullName)
                     .fields(Fields.SEX, Fields.CITY)
+                    .lang(Lang.RU)
+                    .q(fullName)
+                    .count(1)
                     .execute();
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
